@@ -95,16 +95,27 @@ const [coordinates, setCoordinates] = useState<{x: string | number, y: string | 
         ]);
       }
 
-      setCoordinates((prev) => {
-        return {...prev, y: prev.y as string + 64}
-      })
+     
+
+      return () => setNewLinks(null)
     }
   }, [count]);
 
+
+  useEffect(() => {
+    if(newLinks && newLinks.length > 0) {
+      setCoordinates((prev) => {
+        return {...prev, y: prev.y as string + 64}
+      })
+    } else {
+      setCoordinates({x: Base_X, y: Base_Y})
+    }
+  }, [newLinks?.length])
+
   return (
     <main className="flex-1 md:grid md:grid-cols-5 md:gap-4 p-4 bg-[#FAFAFA]/50">
-      <section className="md:flex hidden md:col-span-2 items-center justify-center bg-white md:flex-1" >
-        <div>
+      <section className="md:flex hidden md:col-span-2 items-start justify-center bg-white md:flex-1" >
+        <div className="mt-20">
           <PhoneMockUp links={newLinks} color="" />
         </div>
       </section>
