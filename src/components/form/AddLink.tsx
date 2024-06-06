@@ -58,7 +58,13 @@ function AddLink({
           className="font-normal text-grey text-[18px] z-[9999]"
           onClick={() => {
             if (links) {
-              setNewLinks(links?.filter((l) => l.id !== link.id));
+              let y = 278;
+              const newLinks = links.filter((link) => link.id !== id).map((link) => {
+                const newlink = { ...link, platform: { ...link.platform, coordinates: { ...link.platform.coordinates, y } } };
+                y = y + 64;
+                return newlink;
+              });
+              setNewLinks(newLinks);
             }
           }}
         >
@@ -86,3 +92,4 @@ function AddLink({
 }
 
 export default AddLink;
+
