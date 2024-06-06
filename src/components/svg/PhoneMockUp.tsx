@@ -1,7 +1,7 @@
 import { link } from "@/app/(common)/links/page";
 import IconGithub from "./IconGithub";
 import { platform } from "os";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconArrowRight from "./IconArrowRight";
 
 

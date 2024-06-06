@@ -27,7 +27,7 @@ function FormSelect({
   const [show, setShow] = useState<Boolean>(false);
 
   return (
-    <div className="w-full relative">
+    <div className="w-full z-50 relative">
       <div className="relative">
         <FaChevronDown
           className={`absolute right-4 top-[50%] bottom-[50%] -translate-y-[50%] transition-all ease-in duration-200 text-primary${

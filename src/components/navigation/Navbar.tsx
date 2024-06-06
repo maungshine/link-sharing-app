@@ -5,6 +5,8 @@ import IconHeaderLink from "../svg/IconHeaderLink";
 import { usePathname } from "next/navigation";
 import { BiUserCircle } from "react-icons/bi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { Button } from "../ui/button";
+import { handleSignOut } from "@/actions/signout.action";
 
 function Navbar() {
   const pathname = usePathname();
@@ -37,7 +39,8 @@ function Navbar() {
               pathname === "/links" ? " bg-hover-foreground text-primary" : ""
             }`}
           >
-            <IconHeaderLink color="currentColor" /> <span className="hidden sm:block">Links</span>
+            <IconHeaderLink color="currentColor" />{" "}
+            <span className="hidden sm:block">Links</span>
           </Link>
           <Link
             href={"/profile"}
@@ -45,15 +48,20 @@ function Navbar() {
               pathname === "/profile" ? " bg-hover-foreground text-primary" : ""
             }`}
           >
-            <BiUserCircle className="text-2xl" /><span className="hidden sm:block">Profile</span>
+            <BiUserCircle className="text-2xl" />
+            <span className="hidden sm:block">Profile</span>
           </Link>
+          <form action={handleSignOut}>
+            <Button className="h-10">Logout</Button>
+          </form>
         </div>
         <div className="flex items-center justify-center">
           <Link
             href={"/preview"}
             className="border text-primary border-primary/60 rounded-[8px] px-4 py-2"
           >
-            <MdOutlineRemoveRedEye className="sm:hidden" /><span className="hidden sm:block">Preview</span>
+            <MdOutlineRemoveRedEye className="sm:hidden" />
+            <span className="hidden sm:block">Preview</span>
           </Link>
         </div>
       </div>

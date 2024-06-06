@@ -1,6 +1,6 @@
+import { handleLogin } from "@/actions/login.action";
 import FormInput from "@/components/form/FormInput";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,7 +21,11 @@ function LoginPage() {
         <p className="body-m text-grey mt-2">
           Add you details below to get back into the app
         </p>
-        <form action="" className="mt-8">
+        <form 
+        action={async (formData) => {
+          'use server'
+          await handleLogin(formData);
+        }} className="mt-8">
           <FormInput
             type="email"
             id="email"

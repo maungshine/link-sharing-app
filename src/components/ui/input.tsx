@@ -1,22 +1,14 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, src, ...props }, ref) => {
+  ({ className, type, ...props }, ref) => {
     return (
-      <div className="relative">
-        <Image
-          alt="email icon"
-          className="h-4 w-4 absolute top-[50%] bottom-[50%] -translate-y-[50%] left-4"
-          src={src as string}
-          width={32}
-          height={32}
-        />
         <input
           type={type}
           className={cn(
@@ -26,7 +18,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-      </div>
     );
   }
 );

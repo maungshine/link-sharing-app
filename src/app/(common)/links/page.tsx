@@ -2,10 +2,13 @@
 import AddLink from "@/components/form/AddLink";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import IconFrontendMentor from "@/components/svg/IconFrontendMentor";
 import IconGithub from "@/components/svg/IconGithub";
 import PhoneMockUp from "@/components/svg/PhoneMockUp";
+import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
+import Droppable from "@/components/drag-and-drop/Droppable";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
 const Base_X = 35;
 const Base_Y = 278;
@@ -56,7 +59,11 @@ const platform = [
 ];
 
 function page() {
-const [coordinates, setCoordinates] = useState<{x: string | number, y: string | number}>({x: Base_X, y: Base_Y})
+  const [activeLink, setActiveLink] = useState<link | null>(null);
+  const [coordinates, setCoordinates] = useState<{
+    x: string | number;
+    y: string | number;
+  }>({ x: Base_X, y: Base_Y });
   const [newLinks, setNewLinks] = useState<link[] | null>(null);
   const [count, setCount] = useState<number>(0);
 
@@ -95,26 +102,85 @@ const [coordinates, setCoordinates] = useState<{x: string | number, y: string | 
         ]);
       }
 
-     
-
-      return () => setNewLinks(null)
+      return () => setNewLinks(null);
     }
   }, [count]);
 
-
   useEffect(() => {
-    if(newLinks && newLinks.length > 0) {
+    if (newLinks && newLinks.length > 0) {
       setCoordinates((prev) => {
-        return {...prev, y: prev.y as string + 64}
-      })
+        return { ...prev, y: (prev.y as string) + 64 };
+      });
     } else {
-      setCoordinates({x: Base_X, y: Base_Y})
+      setCoordinates({ x: Base_X, y: Base_Y });
     }
-  }, [newLinks?.length])
+  }, [newLinks?.length]);
+
+  const items = useMemo(() => {
+    if (newLinks) {
+      return newLinks.map((item) => {
+        return item.id;
+      });
+    }
+  }, [JSON.stringify(newLinks)]);
+
+  function onDragStart(event: DragStartEvent) {
+    console.log("drag started", event);
+
+    if (event.active.data.current?.type === "link") {
+      setActiveLink(event.active.data.current.link);
+      return;
+    }
+  }
+
+  function onDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeLinkId = active.id;
+    const overLinkId = over.id;
+
+    if (activeLinkId === overLinkId) return;
+
+    setNewLinks((links) => {
+      if (links) {
+        const activeLinkIndex = links?.findIndex(
+          (link) => link.id === activeLinkId
+        );
+
+        const overLinkindex = links?.findIndex(
+          (link) => link.id === overLinkId
+        );
+
+        let y = Base_Y;
+        
+        return arrayMove(links, activeLinkIndex, overLinkindex).map(
+          (link, index) => {
+
+            let links = {
+              ...link,
+              platform: {
+                ...link.platform,
+                coordinates: {
+                  ...link.platform.coordinates,
+                  y,
+                },
+              },
+            };
+
+            y = y + 64;
+
+            return links;
+          }
+        );
+      }
+      return links;
+    });
+  }
 
   return (
     <main className="flex-1 md:grid md:grid-cols-5 md:gap-4 p-4 bg-[#FAFAFA]/50">
-      <section className="md:flex hidden md:col-span-2 items-start justify-center bg-white md:flex-1" >
+      <section className="md:flex hidden md:col-span-2 items-start justify-center bg-white md:flex-1">
         <div className="mt-20">
           <PhoneMockUp links={newLinks} color="" />
         </div>
@@ -136,6 +202,7 @@ const [coordinates, setCoordinates] = useState<{x: string | number, y: string | 
               + Add new link
             </Button>
           </div>
+
           {(!newLinks || newLinks?.length === 0) && (
             <article className="py-[46px] px-5 flex flex-col items-center mt-6 sm:px-[76px] bg-[#FAFAFA]">
               <Image
@@ -156,23 +223,25 @@ const [coordinates, setCoordinates] = useState<{x: string | number, y: string | 
             </article>
           )}
 
-          {count > 0 && (
-            <div>
-              {newLinks &&
-                newLinks.map((link, index) => (
-                  <div>
-                    <AddLink
-                      index={index + 1}
-                      links={newLinks}
-                      link={link}
-                      key={link.id}
-                      id={link.id}
-                      platform={platform}
-                      setNewLinks={setNewLinks}
-                    />
-                  </div>
-                ))}
-            </div>
+          {newLinks && newLinks?.length > 0 && (
+            <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+              <div>
+                <SortableContext items={items as number[]}>
+                  {newLinks &&
+                    newLinks.map((link, index) => (
+                      <AddLink
+                        index={index + 1}
+                        links={newLinks}
+                        link={link}
+                        key={link.id}
+                        id={link.id}
+                        platform={platform}
+                        setNewLinks={setNewLinks}
+                      />
+                    ))}
+                </SortableContext>
+              </div>
+            </DndContext>
           )}
 
           <hr className="my-4 text-grey h-[2px]" />
