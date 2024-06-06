@@ -7,7 +7,6 @@ import IconFrontendMentor from "@/components/svg/IconFrontendMentor";
 import IconGithub from "@/components/svg/IconGithub";
 import PhoneMockUp from "@/components/svg/PhoneMockUp";
 import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
-import Droppable from "@/components/drag-and-drop/Droppable";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
 const Base_X = 35;
@@ -18,6 +17,7 @@ export type link = {
   platform: {
     name: string;
     icon: React.ReactNode;
+    priority: number;
     egLink: string;
     brandColor: string;
     mockUpIcon: React.ReactNode;
@@ -35,6 +35,7 @@ const platform = [
     icon: (
       <IconGithub color="absolute top-[50%] bottom-[50%] -translate-y-[50%]" />
     ),
+    priority: 0,
     egLink: "https://github.com/maungshine",
     brandColor: "#1A1A1A",
     mockUpIcon: <IconGithub color="fill-white" />,
@@ -48,6 +49,7 @@ const platform = [
     icon: (
       <IconFrontendMentor color="absolute top-[50%] bottom-[50%] -translate-y-[50%]" />
     ),
+    priority: 0,
     egLink: "https://www.frontendmentor.io/profile/maungshine",
     brandColor: "#6abecd",
     mockUpIcon: <IconFrontendMentor color="fill-white" />,
@@ -77,6 +79,7 @@ function page() {
             platform: {
               name: "",
               icon: "",
+              priority: count,
               egLink: "",
               brandColor: "",
               mockUpIcon: "",
@@ -92,6 +95,7 @@ function page() {
             platform: {
               name: "",
               icon: "",
+              priority: count,
               egLink: "",
               brandColor: "",
               mockUpIcon: "",
@@ -153,7 +157,7 @@ function page() {
         );
 
         let y = Base_Y;
-        
+
         return arrayMove(links, activeLinkIndex, overLinkindex).map(
           (link, index) => {
 
@@ -161,6 +165,7 @@ function page() {
               ...link,
               platform: {
                 ...link.platform,
+                priority: index + 1,
                 coordinates: {
                   ...link.platform.coordinates,
                   y,

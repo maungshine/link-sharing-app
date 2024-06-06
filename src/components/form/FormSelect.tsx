@@ -1,11 +1,7 @@
 "use client";
 import { link } from "@/app/(common)/links/page";
-import Image from "next/image";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { FaChevronDown, FaGithub } from "react-icons/fa";
-
-const Base_X = 48;
-const Base_Y = 278;
+import { FaChevronDown } from "react-icons/fa";
 
 function FormSelect({
   setNewLinks,
@@ -18,6 +14,7 @@ function FormSelect({
   platform: {
     name: string;
     icon: React.ReactNode;
+    priority: number;
     egLink: string;
     brandColor: string;
     mockUpIcon: React.ReactNode;
@@ -56,22 +53,6 @@ function FormSelect({
                 let links: link[];
 
                 if (prev) {
-                  //   links = [
-                  //     {
-                  //       ...link,
-                  //       platform: {
-                  //         name: platform.name,
-                  //         icon: platform.icon,
-                  //         egLink: platform.egLink,
-                  //         brandColor: platform.brandColor,
-                  //         mockUpIcon: platform.mockUpIcon,
-                  //         coordinates: { x: Base_X, y: Base_Y },
-                  //       },
-                  //       url: "",
-                  //     },
-                  //   ];
-                  // } else if (prev) {
-
                   links = [
                     ...prev.map((l) => {
                       if (l.id === link.id) {
@@ -81,6 +62,7 @@ function FormSelect({
                             ...l.platform,
                             name: platform.name,
                             icon: platform.icon,
+                            priority: platform.priority,
                             egLink: platform.egLink,
                             brandColor: platform.brandColor,
                             mockUpIcon: platform.mockUpIcon,

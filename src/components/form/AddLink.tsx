@@ -22,6 +22,7 @@ function AddLink({
   platform: {
     name: string;
     icon: React.ReactNode;
+    priority: number;
     egLink: string;
     brandColor: string;
     mockUpIcon: React.ReactNode;
@@ -29,7 +30,7 @@ function AddLink({
   }[];
   id: number;
 }) {
-  const { setNodeRef, attributes, listeners, transform, transition } =
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
     useSortable({
       id,
       data: {
@@ -47,9 +48,9 @@ function AddLink({
     <div
       ref={setNodeRef}
       style={style}
-      className="bg-[#FAFAFA] p-4 mt-4 rounded-8 flex flex-col w-full gap-4"
+      className={`bg-[#FAFAFA] p-4 mt-4 rounded-8 flex flex-col w-full gap-4${isDragging ? ' relative z-[99999]' : ''}`}
     >
-      <div  className="flex justify-between">
+      <div className="flex justify-between">
         <h3 {...attributes} {...listeners} className="flex items-center gap-1">
           <IoReorderTwoOutline /> <span>Link #{index}</span>
         </h3>
@@ -59,11 +60,20 @@ function AddLink({
           onClick={() => {
             if (links) {
               let y = 278;
-              const newLinks = links.filter((link) => link.id !== id).map((link) => {
-                const newlink = { ...link, platform: { ...link.platform, coordinates: { ...link.platform.coordinates, y } } };
-                y = y + 64;
-                return newlink;
-              });
+              const newLinks = links
+                .filter((link) => link.id !== id)
+                .map((link, index) => {
+                  const newlink = {
+                    ...link,
+                    platform: {
+                      ...link.platform,
+                      priority: index + 1,
+                      coordinates: { ...link.platform.coordinates, y },
+                    },
+                  };
+                  y = y + 64;
+                  return newlink;
+                });
               setNewLinks(newLinks);
             }
           }}
@@ -92,4 +102,3 @@ function AddLink({
 }
 
 export default AddLink;
-
