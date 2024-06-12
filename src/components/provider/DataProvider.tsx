@@ -1,11 +1,11 @@
 'use client'
-import { Link } from "@prisma/client"
 import { createContext } from "react"
+import { link } from "../link/LinkMain"
 
 
-export const DataContext = createContext<Link[] | null>(null)
+export const DataContext = createContext<link[] | null>(null)
 
-function DataProvider({children, value}: {children: React.ReactNode, value: Link[] | null}) {
+function DataProvider({children, value}: {children: React.ReactNode, value: link[] | null}) {
   return (
    <DataContext.Provider value={value}>
         {children}
