@@ -59,7 +59,7 @@ const FeatureSection = () => {
                 </div>
                 <div className="border-t border-gray-300 mt-16 py-12 text-center">
                     <blockquote className="text-xl italic text-gray-800 mx-auto max-w-2xl">
-                        "Our platform empowers you to showcase your work and connect with your audience like never before."
+                    &quot;Our platform empowers you to showcase your work and connect with your audience like never before.&quot;
                     </blockquote>
                 </div>
             </div>

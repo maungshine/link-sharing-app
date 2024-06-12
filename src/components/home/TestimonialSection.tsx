@@ -62,7 +62,7 @@ const TestimonialSection: React.FC = () => {
                   alt={testimonial.name}
                   className="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-4 border-primary"
                 />
-                <p className="text-gray-700 mb-4">"{testimonial.quote}"</p>
+                <p className="text-gray-700 mb-4">&quot;{testimonial.quote}&quot;</p>
                 <h4 className="text-lg font-semibold">{testimonial.name}</h4>
                 <p className="text-gray-500">{testimonial.role}</p>
               </motion.div>

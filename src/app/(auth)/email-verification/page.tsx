@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
-function page() {
+function EmailVerificationPage() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
@@ -75,4 +75,4 @@ function page() {
   );
 }
 
-export default page;
+export default EmailVerificationPage;

@@ -66,7 +66,7 @@ async function ViewPage({ params }: { params: { username: string } }) {
                 User Not Found
               </h1>
               <p className="mt-2 text-gray-600">
-                Sorry, the user you're looking for does not exist.
+                Sorry, the user you&apos;re looking for does not exist.
               </p>
             </div>
             <div className="mt-6">
