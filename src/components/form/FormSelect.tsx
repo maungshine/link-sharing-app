@@ -38,7 +38,7 @@ function FormSelect({
   const links = useContext(DataContext);
 
   const existingLinks = links?.map((link) => {
-    return link.platform;
+    return link.platform.name;
   });
 
   const initialOptions = platform.filter(
