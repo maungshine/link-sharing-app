@@ -9,3 +9,15 @@ export const getUserFromDb = async (email: string) => {
     })
     return user;
 }
+
+
+export const getUserByUsername = async (username: string) => {
+    console.log('getting user...')
+    const user = await db.user.findFirst({
+        where: {
+            username,
+        }
+    })
+
+    return user;
+}

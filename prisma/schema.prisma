@@ -18,6 +18,7 @@ model User {
   id            String          @id @default(cuid())
   first_name    String?
   last_name     String?
+  username      String?         @unique
   email         String          @unique
   password      String
   emailVerified DateTime?
@@ -34,7 +35,7 @@ model Link {
   userId     String
   platform   String
   url         String
-
+  priority    Int
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())

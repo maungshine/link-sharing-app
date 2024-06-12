@@ -7,7 +7,7 @@ import Link from "next/link";
 function LoginPage() {
   return (
     <main className="p-8 flex flex-col sm:items-center sm:justify-center flex-1 sm:bg-[#FAFAFA]">
-      <div className="py-8 flex sm:justify-center justify-start">
+      <Link href={'/'} className="py-8 flex sm:justify-center justify-start">
         <Image
           alt="devlink logo"
           src={"/assets/images/logo-devlinks-large.svg"}
@@ -15,7 +15,7 @@ function LoginPage() {
           height={40}
           className="w-[182px] h-10"
         />
-      </div>
+      </Link>
       <section className="max-w-[476px] sm:bg-white sm:p-8 sm:rounded-sm">
         <h1 className="heading-auth">Login</h1>
         <p className="body-m text-grey mt-2">

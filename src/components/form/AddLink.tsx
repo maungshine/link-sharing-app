@@ -1,13 +1,30 @@
-import { link } from "@/app/(common)/links/page";
+"use client";
+import { link } from "@/components/link/LinkMain";
 import { IoReorderTwoOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
-import { Dispatch, SetStateAction } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
+import { useFormState } from "react-dom";
+import { saveLinks } from "@/actions/link.action";
+import { linkFormState } from "@/types/form-states";
+import { structureType } from "@/types/response";
+import LinkForm from "./LinkForm";
+import { DataContext } from "../provider/DataProvider";
+import { Link } from "@prisma/client";
 
 function AddLink({
+  trash,
+  setStagedTrash,
+  state,
   index,
   links,
   link,
@@ -15,9 +32,12 @@ function AddLink({
   platform,
   id,
 }: {
+  state: linkFormState;
   index: number;
   links: link[] | null;
   link: link;
+  trash: link[] | null;
+  setStagedTrash: Dispatch<SetStateAction<link[] | null>>;
   setNewLinks: Dispatch<SetStateAction<link[] | null>>;
   platform: {
     name: string;
@@ -30,14 +50,35 @@ function AddLink({
   }[];
   id: number;
 }) {
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
-    useSortable({
-      id,
-      data: {
-        type: "link",
-        link: link,
-      },
-    });
+  const data = useContext(DataContext);
+  const [errors, setErrors] = useState(
+    state.errors.filter(
+      (err) => parseInt(Object.keys(err)[0]) === link.id
+    )[0] as structureType
+  );
+
+  useEffect(() => {
+    setErrors(
+      state.errors.filter(
+        (err) => parseInt(Object.keys(err)[0]) === link.id
+      )[0] as structureType
+    );
+  }, [JSON.stringify(state.errors)]);
+
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id,
+    data: {
+      type: "link",
+      link: link,
+    },
+  });
 
   const style = {
     transition,
@@ -48,15 +89,17 @@ function AddLink({
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-[#FAFAFA] p-4 mt-4 rounded-8 flex flex-col w-full gap-4${isDragging ? ' relative z-[99999]' : ''}`}
+      className={`bg-[#FAFAFA] p-4 mt-4 rounded-8 flex flex-col w-full gap-4${
+        isDragging ? " relative z-[99999]" : ""
+      }`}
     >
       <div className="flex justify-between">
         <h3 {...attributes} {...listeners} className="flex items-center gap-1">
           <IoReorderTwoOutline /> <span>Link #{index}</span>
         </h3>
-        <Button
-          variant={"link"}
-          className="font-normal text-grey text-[18px] z-[9999]"
+        <div
+          role="button"
+          className="font-normal cursor-pointer hover:underline text-grey text-[18px] z-[9999]"
           onClick={() => {
             if (links) {
               let y = 278;
@@ -74,28 +117,52 @@ function AddLink({
                   y = y + 64;
                   return newlink;
                 });
+              
               setNewLinks(newLinks);
             }
           }}
         >
           Remove
-        </Button>
+        </div>
       </div>
       <FormSelect
+        trash={trash}
+        errors={errors && errors[link.id]?.platform}
         link={link}
+        newLinks={links}
         setNewLinks={setNewLinks}
         id={id}
         platform={platform}
       />
-      <FormInput
+      <LinkForm
+        error={errors && errors[link.id]?.link}
+        setNewLinks={setNewLinks}
+        value={link.url}
         wrapperClass="mt-4"
         src="/assets/images/icon-link.svg"
-        label="Password"
+        label="Link"
         placeholder={`e.g. ${link.platform.egLink}`}
-        name="url"
+        name={
+          link.id +
+          "_" +
+          (link.platform.name
+            ? link.platform.name.replace(" ", "_")
+            : "platform") +
+          "_url"
+        }
         type="text"
-        id="url"
+        linkId={id}
+        id={link.platform.name + "-url"}
         className="placeholder:text-darkgrey/50 h-12 border-border focus:shadow-[0_5px_10px_5px_rgba(99,60,255,0.2)]"
+      />
+      <input
+        readOnly
+        type="text"
+        hidden
+        value={index}
+        name={
+          link.id + "_" + link.platform.name.replace(" ", "_") + "_priority"
+        }
       />
     </div>
   );

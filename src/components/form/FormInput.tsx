@@ -1,17 +1,19 @@
+'use client'
 import React from "react";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 type FormInputProps = {
-  label: string;
-  type: string;
-  wrapperClass: string;
-  id: string;
-  name: string;
-  placeholder: string;
+  label?: string;
+  type?: string;
+  wrapperClass?: string;
+  id?: string;
+  name?: string;
+  placeholder?: string;
   className?: string;
-  src: string;
+  src?: string;
+  value?: string;
   props?: React.ComponentPropsWithoutRef<"input">;
   error?: string;
 };
@@ -26,6 +28,7 @@ function FormInput({
   wrapperClass,
   className,
   error,
+  value,
   props,
 }: FormInputProps) {
   return (
@@ -43,18 +46,18 @@ function FormInput({
         />
         {error && (
           <div className="absolute bsolute top-[50%] bottom-[50%] -translate-y-[50%] pointer-events-none left-4 w-full h-full flex items-center">
-            <span className="mr-5 body-s text-destructive ml-auto" role="alert">
+            <span className="mr-6 body-s text-destructive ml-auto" role="alert">
               {error}
             </span>
           </div>
         )}
         <Input
-          src={src}
+          value={value}
           type={type}
           id={id}
           name={name}
           placeholder={placeholder}
-          className={className}
+          className={cn(`${error ? 'error-ring' : ''}`, className)}
           {...props}
         />
       </div>

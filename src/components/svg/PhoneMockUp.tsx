@@ -13,7 +13,7 @@ function PhoneMockUp({
   color: string;
   links: link[] | null;
 }) {
-
+  const onlyFiveLinks = links && links?.length > 5 ? links?.slice(0, 5) : links;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@ function PhoneMockUp({
       <rect width="72" height="8" x="117.5" y="214" fill="#EEE" rx="4" />
       <rect width="160" height="16" x="73.5" y="185" fill="#EEE" rx="8" />
 
-      {(!links || links.length === 0) && (
+      {(!onlyFiveLinks || onlyFiveLinks.length === 0) && (
         <>
           <rect width="237" height="44" x="35" y="278" fill="#EEE" rx="8" />
             <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
@@ -45,10 +45,10 @@ function PhoneMockUp({
         </>
       )}
 
-      {links &&
-        links.length > 0 &&
-        links.map((link) => (
-          <>
+      {onlyFiveLinks &&
+        onlyFiveLinks.length > 0 &&
+        onlyFiveLinks.map((link, index) => (
+          <g key={index}>
             <rect
               width="237"
               height="44"
@@ -62,7 +62,7 @@ function PhoneMockUp({
             </text>
             <svg x={link.platform.coordinates.x as number + 13} y={link.platform.coordinates.y as number + 15} width={16} height={16}>{link.platform.mockUpIcon}</svg>
             <IconArrowRight color="" x={link.platform.coordinates.x as number + 200} y={link.platform.coordinates.y as number + 15} />
-          </>
+          </g>
         ))}
     </svg>
   );

@@ -5,6 +5,7 @@ import { saltAndHashPassword } from "@/lib/utils"
 import { generateVerificationCode, sendVerificationEmail } from "@/lib/verification"
 import { registerSchema } from "@/lib/zod"
 import { registerFormState } from "@/types/form-states"
+import { redirect } from "next/navigation"
 
 
 
@@ -65,13 +66,20 @@ export const register = async (formState  : registerFormState, formData: FormDat
         }
     }
 
-    const token = await generateVerificationCode(email);
+    //Just to easy registration I comment out the email verification feature
 
-    await sendVerificationEmail(email, token);
+    // const token = await generateVerificationCode(email);
+
+    // await sendVerificationEmail(email, token);
+
+    // return {
+    //     errors: {
+    //         _form: ['Verification email sent!']
+    //     }
+    // }
+    redirect('/login')
 
     return {
-        errors: {
-            _form: ['Verification email sent!']
-        }
+        errors: {}
     }
 }

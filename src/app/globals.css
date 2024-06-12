@@ -1,148 +1,167 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 0 0% 3.9%;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
 
-      --card: 0 0% 100%;
-      --card-foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
 
-      --primary: 252 100% 62%;
-      --primary-foreground: 0 0% 100%;
+    --primary: 252 100% 62%;
+    --primary-foreground: 0 0% 100%;
 
-      --hover: 252 100% 84%;
-      --hover-foreground: 252 100% 96%;
+    --hover: 252 100% 84%;
+    --hover-foreground: 252 100% 96%;
 
-      --dark-grey: 0 0% 20%;
-      --dark-grey-foreground: 0 0% 20%;
+    --dark-grey: 0 0% 20%;
+    --dark-grey-foreground: 0 0% 20%;
 
-      --grey: 0 0% 45%;
-      --grey-foreground: 0 0% 45%;
+    --grey: 0 0% 45%;
+    --grey-foreground: 0 0% 45%;
 
-      --light-grey: 0 0% 85%;
-      --light-grey-foreground: 0 0% 85%;
+    --light-grey: 0 0% 85%;
+    --light-grey-foreground: 0 0% 85%;
 
-      --white-grey: 0 0% 98%;
-      --white-grey-foreground: 0 0% 98%;
+    --white-grey: 0 0% 98%;
+    --white-grey-foreground: 0 0% 98%;
 
-      --secondary: 0 0% 96.1%;
-      --secondary-foreground: 0 0% 9%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
 
-      --muted: 0 0% 96.1%;
-      --muted-foreground: 0 0% 45.1%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
 
-      --accent: 252 100% 96%;
-      --accent-foreground: 252 100% 62%;
+    --accent: 252 100% 96%;
+    --accent-foreground: 252 100% 62%;
 
-      --destructive: 0 100% 61%;
-      --destructive-foreground: 0 0% 98%;
+    --destructive: 0 100% 61%;
+    --destructive-foreground: 0 0% 98%;
 
-      --border: 0 0% 85%;
-      --input: 252 100% 62%;
-      --ring: 252 100% 62%;
+    --border: 0 0% 85%;
+    --input: 252 100% 62%;
+    --ring: 252 100% 62%;
 
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      --background: 0 0% 3.9%;
-      --foreground: 0 0% 98%;
-
-      --card: 0 0% 3.9%;
-      --card-foreground: 0 0% 98%;
-
-      --popover: 0 0% 3.9%;
-      --popover-foreground: 0 0% 98%;
-
-      --primary: 0 0% 98%;
-      --primary-foreground: 0 0% 9%;
-
-      --hover: 252 100% 84%;
-      --hover-foreground: 252 100% 96%;
-
-      --dark-grey: 0 0% 20%;
-      --dark-grey-foreground: 0 0% 20%;
-
-      --grey: 0 0% 45%;
-      --grey-foreground: 0 0% 45%;
-
-      --light-grey: 0 0% 85%;
-      --light-grey-foreground: 0 0% 85%;
-
-      --white-grey: 0 0% 98%;
-      --white-grey-foreground: 0 0% 98%;
-
-
-      --secondary: 0 0% 14.9%;
-      --secondary-foreground: 0 0% 98%;
-
-      --muted: 0 0% 14.9%;
-      --muted-foreground: 0 0% 63.9%;
-
-      --accent: 0 0% 14.9%;
-      --accent-foreground: 0 0% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
-
-      --border: 0 0% 14.9%;
-      --input: 0 0% 14.9%;
-      --ring: 0 0% 83.1%;
-    }
+    --radius: 0.5rem;
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
 
-    .heading-m {
-      @apply text-[32px] leading-[150%] font-bold;
-    }
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    .heading-auth {
-      @apply text-[24px] text-darkgrey leading-[150%] font-bold;
-    }
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    .heading-s {
-      @apply text-[16px] leading-[150%] font-bold;
-    }
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
 
-    .body-m {
-      @apply text-[16px] leading-[150%];
-    }
+    --hover: 252 100% 84%;
+    --hover-foreground: 252 100% 96%;
 
-    .body-s {
-      @apply text-[12px] leading-[150%];
-    }
+    --dark-grey: 0 0% 20%;
+    --dark-grey-foreground: 0 0% 20%;
 
-    .btn-primary {
-      @apply bg-primary text-white border-r-[8px] active:bg-hover active:text-white disabled:bg-primary/25 disabled:text-white;
-    }
+    --grey: 0 0% 45%;
+    --grey-foreground: 0 0% 45%;
 
-    .btn-secondary {
-      @apply bg-white text-primary border border-primary border-r-[8px] active:bg-hover-foreground active:text-primary disabled:bg-white/25 disabled:text-primary;
-    }
+    --light-grey: 0 0% 85%;
+    --light-grey-foreground: 0 0% 85%;
 
-    .link-tab {
-      @apply bg-white text-grey border-none rounded-[8px] px-5 py-2 flex items-center justify-center;
-    }
+    --white-grey: 0 0% 98%;
+    --white-grey-foreground: 0 0% 98%;
 
-    .link-tab:hover {
-      @apply text-primary;
-    }
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
 
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 
-  .custom-input:focus {
-    outline: hsl(252 100% 62%) solid 1px !important;
+  .heading-m {
+    @apply text-[32px] leading-[150%] font-bold;
   }
+
+  .heading-auth {
+    @apply text-[24px] text-darkgrey leading-[150%] font-bold;
+  }
+
+  .heading-s {
+    @apply text-[16px] leading-[150%] font-bold;
+  }
+
+  .body-m {
+    @apply text-[16px] leading-[150%];
+  }
+
+  .body-s {
+    @apply text-[12px] leading-[150%];
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white border-r-[8px] active:bg-hover active:text-white disabled:bg-primary/25 disabled:text-white;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary border border-primary border-r-[8px] active:bg-hover-foreground active:text-primary disabled:bg-white/25 disabled:text-primary;
+  }
+
+  .link-tab {
+    @apply bg-white text-grey border-none rounded-[8px] px-5 py-2 flex items-center justify-center;
+  }
+
+  .link-tab:hover {
+    @apply text-primary;
+  }
+}
+
+.custom-input:focus {
+  outline: hsl(252 100% 62%) solid 1px !important;
+}
+
+.error-ring {
+  border: 1px solid hsl(0 72.8% 70.6%);
+}
+
+.error-ring:focus {
+  box-shadow: 0 5 10 10 hsl(252 100% 62%);
+  border: none;
+}
+
+.gradient-text {
+  background-image: linear-gradient(45deg, #4f46e5, #8f5afe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback for browsers that do not support background-clip */
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
