@@ -82,18 +82,6 @@ export const updateProfile = async (
     return { errors: result.error.flatten().fieldErrors };
   }
 
-  if (userProfile.email !== result.data.email) {
-    const existingEmail = await db.user.findFirst({
-      where: {
-        email: result.data.email as string,
-      },
-    });
-
-    if (existingEmail) {
-      return { errors: { email: ["Email already exists!"] } };
-    }
-  }
-
   if (userProfile.username !== result.data.username) {
     const user = await db.user.findFirst({
       where: {
@@ -106,6 +94,18 @@ export const updateProfile = async (
     }
   }
 
+  if (userProfile.email !== result.data.email) {
+    const existingEmail = await db.user.findFirst({
+      where: {
+        email: result.data.email as string,
+      },
+    });
+
+    if (existingEmail) {
+      return { errors: { email: ["Email already exists!"] } };
+    }
+  }
+  
   const updatedUserProfile = await db.user.update({
     where: { id: userProfile.id },
     data: {

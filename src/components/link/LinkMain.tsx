@@ -88,8 +88,12 @@ function LinkMain({ links }: { links: link[] }) {
       }
     }
 
+  }, [JSON.stringify(newLinks)]);
+
+  useEffect(() => {
     if (newLinks && newLinks.length > 0) {
       if (newLinks.length === links?.length) {
+        console.log("here");
         setCoordinates((prev) => {
           return {
             ...prev,
@@ -101,13 +105,14 @@ function LinkMain({ links }: { links: link[] }) {
         });
         return;
       }
+      if(newLinks.length > 0)
       setCoordinates((prev) => {
         return { ...prev, y: (prev.y as string) + 64 };
       });
     } else {
       setCoordinates({ x: Base_X, y: Base_Y });
     }
-  }, [JSON.stringify(newLinks)]);
+  }, [newLinks?.length]);
 
   useEffect(() => {
     async function handleDelete() {
@@ -182,6 +187,8 @@ function LinkMain({ links }: { links: link[] }) {
     });
   }
 
+  console.log(newLinks);
+  console.log(coordinates);
   return (
     <main className="flex-1 md:grid md:grid-cols-5 md:gap-4 p-4 bg-[#FAFAFA]/50">
       <section className="md:flex hidden md:col-span-2 items-start justify-center bg-white md:flex-1">

@@ -7,6 +7,7 @@ type SubmitButtonProps = {
   pendingLabel: string;
   className?: string;
   disable?: boolean;
+  state?: boolean;
 };
 
 function SubmitButton({
@@ -14,15 +15,16 @@ function SubmitButton({
   pendingLabel,
   className,
   disable,
+  state
 }: SubmitButtonProps) {
   const status = useFormStatus();
   return (
     <Button
       type="submit"
       className={className}
-      disabled={status.pending || disable}
+      disabled={status.pending || disable || state}
     >
-      {status.pending ? pendingLabel : label}
+      {status.pending || state ? pendingLabel : label}
     </Button>
   );
 }

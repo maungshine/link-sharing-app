@@ -1,9 +1,8 @@
 "use client";
 import PhoneMockUp from "../svg/PhoneMockUp";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { link } from "../link/LinkMain";
-import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   ProfileFormState,
   handleImageUpload,
@@ -13,8 +12,6 @@ import {
 import Image from "next/image";
 import IconImageUpload from "../svg/IconImageUpload";
 import { User } from "@prisma/client";
-import { useFormState } from "react-dom";
-import { motion } from "framer-motion";
 import { FaSave } from "react-icons/fa";
 import ToastMessage from "../toast/Toast";
 import { deleteImage } from "@/actions/image-upload.action";
@@ -54,6 +51,8 @@ function ProfileMain({
 
   const [imgFile, setImgFile] = useState<string | null>(null);
 
+  const [pending, setPending] = useState<boolean>(false);
+
   const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] as File;
     const formData = new FormData();
@@ -90,6 +89,7 @@ function ProfileMain({
           <form
             onSubmit={async (e) => {
               e.preventDefault();
+              setPending(true);
               // Create a FormData object
               const formData = new FormData();
               formData.append("firstName", firstName ? firstName : "");
@@ -108,6 +108,9 @@ function ProfileMain({
               }
 
               const response = await updateProfile(formData);
+              if(response) {
+                setPending(false);
+              }
               setState(response);
             }}
             className="flex flex-col flex-1 gap-4"
@@ -268,6 +271,7 @@ function ProfileMain({
                       </div>
                     )}
                     <Input
+                      disabled
                       name="email"
                       className="border-border focus:border-none indent-2"
                       id="email"
@@ -284,7 +288,8 @@ function ProfileMain({
               <SubmitButton
                 className="w-full sm:w-auto sm:ml-auto sm:px-6 sm:h-10"
                 label="Save"
-                pendingLabel="Saving"
+                pendingLabel="Saving..."
+                state={pending}
               />
             </div>
           </form>
