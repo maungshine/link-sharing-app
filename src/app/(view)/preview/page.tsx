@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import BackToEditor from "@/components/preview/BackToEditor";
 import CopyLinkToClipboard from "@/components/share-view/CopyLinkToClickboard";
 import IconArrowRight from "@/components/svg/IconArrowRight";
 import { Button } from "@/components/ui/button";
@@ -15,12 +16,7 @@ async function ProfilePage() {
   return (
     <>
       <nav className="flex w-full sm:hidden items-center justify-between py-4 px-6 z-30 sm:bg-white sm:mt-4 rounded-2xl">
-        <Link
-          href={"/links"}
-          className="border border-primary rounded-md py-2 text-md font-semibold text-sm text-primary hover:bg-hover-foreground/50 px-4"
-        >
-          Back to Editor
-        </Link>
+        <BackToEditor />
 
         <CopyLinkToClipboard
           username={username}
@@ -102,8 +98,8 @@ async function ProfilePage() {
       </section>
       {(!user?.first_name || !user?.last_name || !user?.image) && (
         <div className="absolute bottom-10 left-[50%] right-[50%] -translate-x-[50%] w-full text-center">
-          Your profile is incomplete. 
-          <Link href="/profile"  className="text-blue-500 ms-2 hover:underline">
+          Your profile is incomplete.
+          <Link href="/profile" className="text-blue-500 ms-2 hover:underline">
             Complete your profile
           </Link>
         </div>
