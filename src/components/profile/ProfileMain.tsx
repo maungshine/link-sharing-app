@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { FaSave } from "react-icons/fa";
 import ToastMessage from "../toast/Toast";
 import { deleteImage } from "@/actions/image-upload.action";
+import SubmitButton from "../form/SubmitButton";
 
 function ProfileMain({
   links,
@@ -101,7 +102,6 @@ function ProfileMain({
                   const imgKey = strArr[strArr.length - 1];
                   console.log(imgKey);
                   const res = await deleteImage(imgKey);
-
                 }
 
                 const response = await saveImage(imgFile);
@@ -287,6 +287,11 @@ function ProfileMain({
               >
                 Save
               </Button>
+              <SubmitButton
+                className="flex sm:mt-auto px-10 border-t flex-col justify-center py-4 sm:py-10"
+                label="Save"
+                pendingLabel="Saving"
+              />
             </div>
           </form>
         </div>
