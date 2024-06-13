@@ -52,7 +52,7 @@ function Navbar() {
             <BiUserCircle className="text-2xl" />
             <span className="hidden sm:block">Profile</span>
           </Link>
-          <form action={handleSignOut}>
+          <form action={handleSignOut} className="flex items-center">
             <SubmitButton pendingLabel="Logging out..." label="Logout"  />
           </form>
         </div>
