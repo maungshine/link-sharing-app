@@ -12,7 +12,7 @@ export default auth(async (req) => {
   const isProtected = pretected.includes(nextUrl.pathname);
   const unAuthorized = !isLoggedIn && isProtected;
 
-  if (isLoggedIn && ["/login", "logout"].includes(nextUrl.pathname)) {
+  if (isLoggedIn && ["/login", "/register"].includes(nextUrl.pathname)) {
     return Response.redirect(new URL("/links", nextUrl));
   }
 
