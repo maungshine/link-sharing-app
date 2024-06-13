@@ -87,9 +87,7 @@ function LinkMain({ links }: { links: link[] }) {
         });
       }
     }
-  }, [JSON.stringify(newLinks)]);
 
-  useEffect(() => {
     if (newLinks && newLinks.length > 0) {
       if (newLinks.length === links?.length) {
         setCoordinates((prev) => {
@@ -103,14 +101,15 @@ function LinkMain({ links }: { links: link[] }) {
         });
         return;
       }
-      if (newLinks.length > 0)
+      const y = newLinks.length * 64 + 278;
+      if (coordinates.y !== y)
         setCoordinates((prev) => {
           return { ...prev, y: (prev.y as string) + 64 };
         });
     } else {
       setCoordinates({ x: Base_X, y: Base_Y });
     }
-  }, [newLinks?.length]);
+  }, [JSON.stringify(newLinks)]);
 
   useEffect(() => {
     async function handleDelete() {
