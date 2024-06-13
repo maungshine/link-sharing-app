@@ -17,6 +17,7 @@ import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { deleteLinks, saveLinks } from "@/actions/link.action";
 import { useFormState, useFormStatus } from "react-dom";
 import { platform } from "@/lib/data";
+import SubmitButton from "../form/SubmitButton";
 
 const Base_X = 35;
 const Base_Y = 278;
@@ -50,10 +51,9 @@ function LinkMain({ links }: { links: link[] }) {
   const [newLinks, setNewLinks] = useState<link[] | null>(links);
 
   const [state, action] = useFormState(saveLinks, { errors: [{}] });
-  const { pending } = useFormStatus();
+
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
-
 
   const sensors = useSensors(mouseSensor, touchSensor);
 
@@ -309,13 +309,12 @@ function LinkMain({ links }: { links: link[] }) {
             )}
 
             <div className="flex mt-auto py-8 border-t">
-              <Button
-                type="submit"
+              <SubmitButton
                 className="w-full sm:w-auto sm:ml-auto sm:px-6 sm:h-10"
-                disabled={!!newLinks && newLinks.length > 0 ? false : true}
-              >
-                Save
-              </Button>
+                disable={!!newLinks && newLinks.length > 0 ? false : true}
+                label="Save"
+                pendingLabel="Saving..."
+              />
             </div>
           </form>
         </div>

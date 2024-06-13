@@ -13,21 +13,21 @@ import IconTwitch from "@/components/svg/IconTwitch";
 import IconTwitter from "@/components/svg/IconTwitter";
 import IconYoutube from "@/components/svg/IconYoutube";
 
-export const urlValidator : Record<string, RegExp> = {
-  Github: /^https:\/\/github.com\/.*$/,
-  Frontend_Mentor: /^https:\/\/frontendmentor.io\/profile\/.*$/,
-  Twitter: /^https:\/\/twitter.com\/.*$/,
-  Twitch: /^https:\/\/twitch.tv\/.*$/,
-  Linkedin: /^https:\/\/linkedin.com\/in\/.*$/,
-  Youtube: /^https:\/\/youtube.com\/.*$/,
-  Facebook: /^https:\/\/facebook.com\/.*$/,
-  Codepen: /^https:\/\/codepen.io\/.*$/,
-  Codewars: /^https:\/\/codewars.com\/.*$/,
-  Devto: /^https:\/\/dev.to\/.*$/,
-  Hashnode: /^https:\/\/hashnode.com\/@.*$/,
-  Stackoverflow: /^https:\/\/stackoverflow.com\/.*$/,
-  FreeCodeCamp: /^https:\/\/freecodecamp.org\/.*$/,
-  Gitlab: /^https:\/\/gitlab.com\/.*$/,
+export const urlValidator: Record<string, RegExp> = {
+  Github: /^https:\/\/(www\.)?github.com\/.*$/,
+  Frontend_Mentor: /^https:\/\/(www\.)?frontendmentor.io\/profile\/.*$/,
+  Twitter: /^https:\/\/(www\.)?x.com\/.*$/,
+  Twitch: /^https:\/\/(www\.)?twitch.tv\/.*$/,
+  Linkedin: /^https:\/\/(www\.)?linkedin.com\/in\/.*$/,
+  Youtube: /^https:\/\/(www\.)?youtube.com\/.*$/,
+  Facebook: /^https:\/\/(www\.)?facebook.com\/.*$/,
+  Codepen: /^https:\/\/(www\.)?codepen.io\/.*$/,
+  Codewars: /^https:\/\/(www\.)?codewars.com\/.*$/,
+  Devto: /^https:\/\/(www\.)?dev.to\/.*$/,
+  Hashnode: /^https:\/\/(www\.)?hashnode.com\/@.*$/,
+  Stackoverflow: /^https:\/\/(www\.)?stackoverflow.com\/.*$/,
+  FreeCodeCamp: /^https:\/\/(www\.)?freecodecamp.org\/.*$/,
+  Gitlab: /^https:\/\/(www\.)?gitlab.com\/.*$/,
 };
 
 export const platform = [
@@ -65,7 +65,7 @@ export const platform = [
       <IconTwitter color="absolute top-[50%] bottom-[50%] -translate-y-[50%]" />
     ),
     priority: 0,
-    egLink: "https://www.x.com/maungshine",
+    egLink: "https://.x.com/maungshine",
     brandColor: "#1da1f2",
     mockUpIcon: <IconTwitter color="fill-white" />,
     coordinates: {
