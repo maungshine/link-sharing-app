@@ -14,9 +14,9 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 shadow-md z-50">
-        <div className="max-w-screen-xl mx-auto px-8 flex justify-between items-center">
+        <div className="max-w-screen-xl mx-auto sm:px-8 px-2 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold sm:w-40 w-36">
-            <IconLogo className={''} />
+            <IconLogo className={""} />
           </Link>
           <div className="flex items-center">
             <Link
