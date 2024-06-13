@@ -7,6 +7,7 @@ import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import {
   ProfileFormState,
   handleImageUpload,
+  saveImage,
   updateProfile,
 } from "@/actions/update-profile.actions";
 import Image from "next/image";
@@ -16,6 +17,7 @@ import { useFormState } from "react-dom";
 import { motion } from "framer-motion";
 import { FaSave } from "react-icons/fa";
 import ToastMessage from "../toast/Toast";
+import { deleteImage } from "@/actions/image-upload.action";
 
 function ProfileMain({
   links,
@@ -24,33 +26,43 @@ function ProfileMain({
   links: link[];
   userProfile: User | null;
 }) {
-
   const [imagePreview, setImagePreview] = useState<string | null>(
-    userProfile?.image && userProfile.image !== 'null' ? userProfile.image : null
+    userProfile?.image && userProfile.image !== "null"
+      ? userProfile.image
+      : null
   );
   const [firstName, setFirstName] = useState<string | null>(
-    userProfile?.first_name && userProfile.first_name !== 'null' ? userProfile.first_name : null
+    userProfile?.first_name && userProfile.first_name !== "null"
+      ? userProfile.first_name
+      : null
   );
   const [lastName, setLastName] = useState<string | null>(
-    userProfile?.last_name && userProfile.last_name !== 'null' ? userProfile.last_name : null
+    userProfile?.last_name && userProfile.last_name !== "null"
+      ? userProfile.last_name
+      : null
   );
-  const [email, setEmail] = useState<string | null>(userProfile?.email ? userProfile.email : null);
+  const [email, setEmail] = useState<string | null>(
+    userProfile?.email ? userProfile.email : null
+  );
   const [username, setUsername] = useState<string | null>(
-    userProfile?.username && userProfile.username !== 'null' ? userProfile.username : null
+    userProfile?.username && userProfile.username !== "null"
+      ? userProfile.username
+      : null
   );
   const [state, setState] = useState<ProfileFormState | null>(null);
 
-  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [imgFile, setImgFile] = useState<string | null>(null);
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] as File;
+    const formData = new FormData();
+    formData.append("image", file);
     if (file) {
-      setImgFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      const res = await handleImageUpload(formData);
+      if (res) {
+        setImagePreview(res);
+        setImgFile(res);
+      }
     }
   };
 
@@ -79,19 +91,22 @@ function ProfileMain({
               e.preventDefault();
               // Create a FormData object
               const formData = new FormData();
-              formData.append("firstName", firstName ? firstName : '');
-              formData.append("lastName", lastName ? lastName : '');
-              formData.append("email", email ? email : '');
-              formData.append("username", username ? username : '');
-              if(imgFile) {
-                const imgFormData = new FormData();
-                imgFormData.append("image", imgFile);
-                const response = await handleImageUpload(imgFormData);
-                if(response) {
-                  setImagePreview(response);
+              formData.append("firstName", firstName ? firstName : "");
+              formData.append("lastName", lastName ? lastName : "");
+              formData.append("email", email ? email : "");
+              formData.append("username", username ? username : "");
+              if (imgFile) {
+                if (userProfile?.image) {
+                  const strArr = userProfile.image.split("/");
+                  const imgKey = strArr[strArr.length - 1];
+                  console.log(imgKey);
+                  const res = await deleteImage(imgKey);
+
                 }
+
+                const response = await saveImage(imgFile);
               }
-              
+
               const response = await updateProfile(formData);
               setState(response);
             }}

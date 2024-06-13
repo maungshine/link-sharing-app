@@ -147,15 +147,6 @@ export const handleImageUpload = async (
     return null;
   }
 
-  if (user.image) {
-    const strArr = user.image.split("/");
-    const imgKey = strArr[strArr.length - 1];
-
-    const res = await deleteImage(imgKey);
-
-    console.log(res);
-  }
-
   try {
     //fetch signdedUrl from server
     const signedUrl = await getSignedURL();
@@ -176,15 +167,23 @@ export const handleImageUpload = async (
       },
     });
 
-    await db.user.update({
-      where: { email: session.user?.email as string },
-      data: { image: response.url.split("?")[0] },
-    });
-
     return response.url.split("?")[0];
   } catch (error) {
     console.log(error);
   }
 
   return null;
+};
+
+export const saveImage = async (url: string) => {
+  const session = await auth();
+  if (!session) {
+    return null;
+  }
+  await db.user.update({
+    where: { email: session.user?.email as string },
+    data: { image: url.split("?")[0] },
+  });
+
+  return;
 };
