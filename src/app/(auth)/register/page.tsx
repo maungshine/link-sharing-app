@@ -2,8 +2,6 @@
 import { register } from "@/actions/register.action";
 import FormInput from "@/components/form/FormInput";
 import SubmitButton from "@/components/form/SubmitButton";
-import { Button } from "@/components/ui/button";
-import { registerFormState } from "@/types/form-states";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +35,7 @@ function RegisterPage() {
             wrapperClass="mt-4"
             src="/assets/images/icon-email.svg"
             label="Email"
-            error={formState.errors.email?.join(" ,")}
+            error={formState.errors.email && formState.errors.email[0]}
           />
           <FormInput
             wrapperClass="mt-4"
@@ -48,7 +46,7 @@ function RegisterPage() {
             type="password"
             id="password"
             className="placeholder:text-darkgrey/50"
-            error={formState.errors.password?.join(" ,")}
+            error={formState.errors.password && formState.errors.password[0]}
           />
           <FormInput
             wrapperClass="mt-4"
@@ -59,7 +57,7 @@ function RegisterPage() {
             type="password"
             id="confirmPassword"
             className="placeholder:text-darkgrey/50"
-            error={formState.errors.confirmPassword?.join(" ,")}
+            error={formState.errors.confirmPassword && formState.errors.confirmPassword[0]}
           />
           <p className="body-s text-darkgrey/50 my-4">
             Password must contain at least 8 characters
@@ -67,7 +65,7 @@ function RegisterPage() {
 
           {formState.errors._form && (
             <p className="text-destructive body-s my-4">
-              {formState.errors._form.join(" ,")}
+              {formState.errors._form[0]}
             </p>
           )}
           <div className="flex mt-6">

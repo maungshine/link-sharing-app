@@ -173,7 +173,7 @@ function ProfileMain({
                           className="mr-6 body-s text-destructive ml-auto"
                           role="alert"
                         >
-                          {state?.errors.firstName.join(" ,")}
+                          {state?.errors.firstName[0]}
                         </span>
                       </div>
                     )}
@@ -203,7 +203,7 @@ function ProfileMain({
                           className="mr-6 body-s text-destructive ml-auto"
                           role="alert"
                         >
-                          {state?.errors.lastName.join(" ,")}
+                          {state?.errors.lastName[0]}
                         </span>
                       </div>
                     )}
@@ -233,7 +233,7 @@ function ProfileMain({
                           className="mr-6 body-s text-destructive ml-auto"
                           role="alert"
                         >
-                          {state?.errors.username.join(" ,")}
+                          {state?.errors.username[0]}
                         </span>
                       </div>
                     )}
@@ -281,14 +281,8 @@ function ProfileMain({
             </div>
 
             <div className="flex sm:mt-auto px-10 border-t flex-col justify-center py-4 sm:py-10">
-              <Button
-                type="submit"
-                className="w-full sm:w-auto sm:ml-auto sm:px-6 sm:h-10"
-              >
-                Save
-              </Button>
               <SubmitButton
-                className="flex sm:mt-auto px-10 border-t flex-col justify-center py-4 sm:py-10"
+                className="w-full sm:w-auto sm:ml-auto sm:px-6 sm:h-10"
                 label="Save"
                 pendingLabel="Saving"
               />

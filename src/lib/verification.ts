@@ -35,18 +35,6 @@ export const generateVerificationCode = async (
 
 
 
-export const sendVerificationEmail = async (email: string, token: string) => {
-    const confirmLink = `http://localhost:3000/email-verification?token=${token}`;
-
-    await resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: email,
-        subject: 'Sending Email Verification link',
-        html: `<p>Here is the code to verify your email</p><h2>${confirmLink}</h2>`
-    })
-}
-
-
 export const getVerificationTokenByToken = async (token: string) => {
     const verificationToken = db.verificationToken.findFirst({
         where: {

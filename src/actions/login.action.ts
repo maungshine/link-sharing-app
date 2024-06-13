@@ -1,7 +1,9 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { sendVerificationEmail } from "@/lib/sendEmail";
 import { wait } from "@/lib/utils";
+import { generateVerificationCode } from "@/lib/verification";
 import { signInSchema } from "@/lib/zod";
 import { getUserFromDb } from "@/queries/user";
 import { loginFormState } from "@/types/form-states";
@@ -28,6 +30,20 @@ export const handleLogin = async (
   if (!user) {
     return {
       errors: { _form: ["Login failed!"] },
+    };
+  }
+
+  if(!user.emailVerified) {
+
+    const token = await generateVerificationCode(user.email);
+
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/email-verification?token=${token}`;
+
+
+    await sendVerificationEmail({ to: result.data.email, verificationUrl });
+
+    return {
+      errors: { _form: ["Login failed! Verify your email first"] },
     };
   }
 
