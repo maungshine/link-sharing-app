@@ -26,5 +26,10 @@ export async function sendVerificationEmail({ to, verificationUrl }: SendVerific
     html: emailHtml,
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+
+  } catch (error) {
+    console.log(error)
+  }
 }
