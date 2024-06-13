@@ -18,6 +18,7 @@ import { deleteLinks, saveLinks } from "@/actions/link.action";
 import { useFormState, useFormStatus } from "react-dom";
 import { platform } from "@/lib/data";
 import SubmitButton from "../form/SubmitButton";
+import { useRouter } from "next/navigation";
 
 const Base_X = 35;
 const Base_Y = 278;
@@ -49,7 +50,7 @@ function LinkMain({ links }: { links: link[] }) {
     y: string | number;
   }>({ x: Base_X, y: Base_Y });
   const [newLinks, setNewLinks] = useState<link[] | null>(links);
-
+  const router = useRouter();
   const [state, action] = useFormState(saveLinks, { errors: [{}] });
 
   const mouseSensor = useSensor(MouseSensor);

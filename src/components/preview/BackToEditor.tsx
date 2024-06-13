@@ -1,15 +1,15 @@
 "use client";
 
-import { Button } from "@react-email/components";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 function BackToEditor() {
   const router = useRouter();
   return (
     <Button
+      variant={"outline"}
       onClick={() => {
-        router.replace("/push");
+        router.push("/links");
       }}
-      className="border border-primary rounded-md py-2 text-md font-semibold text-sm text-primary hover:bg-hover-foreground/50 px-4"
     >
       Back to Editor
     </Button>
