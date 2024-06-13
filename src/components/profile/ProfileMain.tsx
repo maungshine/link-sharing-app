@@ -6,6 +6,7 @@ import { link } from "../link/LinkMain";
 import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import {
   ProfileFormState,
+  handleImageUpload,
   updateProfile,
 } from "@/actions/update-profile.actions";
 import Image from "next/image";
@@ -38,7 +39,6 @@ function ProfileMain({
     userProfile?.username && userProfile.username !== 'null' ? userProfile.username : null
   );
   const [state, setState] = useState<ProfileFormState | null>(null);
-
 
   const [imgFile, setImgFile] = useState<File | null>(null);
 
@@ -84,7 +84,12 @@ function ProfileMain({
               formData.append("email", email ? email : '');
               formData.append("username", username ? username : '');
               if(imgFile) {
-                formData.append("image", imgFile);
+                const imgFormData = new FormData();
+                imgFormData.append("image", imgFile);
+                const response = await handleImageUpload(imgFormData);
+                if(response) {
+                  setImagePreview(response);
+                }
               }
               
               const response = await updateProfile(formData);
