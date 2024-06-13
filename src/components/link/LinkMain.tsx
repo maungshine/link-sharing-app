@@ -4,7 +4,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import PhoneMockUp from "@/components/svg/PhoneMockUp";
-import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  DragStartEvent,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { deleteLinks, saveLinks } from "@/actions/link.action";
 import { useFormState, useFormStatus } from "react-dom";
@@ -43,6 +51,11 @@ function LinkMain({ links }: { links: link[] }) {
 
   const [state, action] = useFormState(saveLinks, { errors: [{}] });
   const { pending } = useFormStatus();
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+
+
+  const sensors = useSensors(mouseSensor, touchSensor);
 
   useEffect(() => {
     const changedLinks = newLinks?.map((l) => l.platform.name);
@@ -268,7 +281,11 @@ function LinkMain({ links }: { links: link[] }) {
             }}
           >
             {newLinks && newLinks?.length > 0 && (
-              <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+              <DndContext
+                onDragStart={onDragStart}
+                onDragEnd={onDragEnd}
+                sensors={sensors}
+              >
                 <div>
                   <SortableContext items={items as number[]}>
                     {newLinks &&
