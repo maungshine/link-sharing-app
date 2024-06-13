@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 type SubmitButtonProps = {
   label: string;
   pendingLabel: string;
-  className: string;
+  className?: string;
   disable?: boolean;
 };
 

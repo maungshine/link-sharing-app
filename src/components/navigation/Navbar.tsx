@@ -7,6 +7,7 @@ import { BiUserCircle } from "react-icons/bi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Button } from "../ui/button";
 import { handleSignOut } from "@/actions/signout.action";
+import SubmitButton from "../form/SubmitButton";
 
 function Navbar() {
   const pathname = usePathname();
@@ -52,7 +53,7 @@ function Navbar() {
             <span className="hidden sm:block">Profile</span>
           </Link>
           <form action={handleSignOut}>
-            <Button className="h-10">Logout</Button>
+            <SubmitButton pendingLabel="Logging out..." label="Logout"  />
           </form>
         </div>
         <div className="flex items-center justify-center">

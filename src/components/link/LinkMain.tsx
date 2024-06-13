@@ -54,7 +54,6 @@ function LinkMain({ links }: { links: link[] }) {
 
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
-
   const sensors = useSensors(mouseSensor, touchSensor);
 
   useEffect(() => {
