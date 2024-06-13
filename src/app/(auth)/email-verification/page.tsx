@@ -1,13 +1,14 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { verifyEmailResponse } from "@/types/response";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
 function EmailVerificationPage() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const router = useRouter();
 
   const searchParams = useSearchParams();
 
@@ -55,20 +56,26 @@ function EmailVerificationPage() {
         </div>
 
         {error && (
-          <div className="bg-red-200 text-red-600 border-2 border-red-300 py-3 px-2 rounded-lg">
+          <div className="bg-red-200 text-red-600 border-2 border-red-300 py-2 px-8 rounded-lg">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-green-200 text-green-600 border-2 border-green-300 py-3 px-2 rounded-lg">
+          <div className="bg-green-200 text-green-600 border-2 border-green-300 py-2 px-8 rounded-lg">
             {success}
           </div>
         )}
         <div className="flex flex-col items-center">
-          <Link href="/login" className="px-4 py-2 bg-primary text-white">
+          <Button
+            onClick={() => {
+              router.push("/login");
+            }}
+            className="w-fit"
+            disabled={!success && !error}
+          >
             Go To Login Page
-          </Link>
+          </Button>
         </div>
       </div>
     </main>

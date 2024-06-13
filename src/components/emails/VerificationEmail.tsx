@@ -82,8 +82,8 @@ const container: React.CSSProperties = {
 };
 
 const header: React.CSSProperties = {
-  backgroundColor: "#007bff",
-  padding: "10px",
+  backgroundColor: "#643DFF",
+  padding: "40px",
   borderTopLeftRadius: "8px",
   borderTopRightRadius: "8px",
 };
@@ -100,8 +100,8 @@ const content: React.CSSProperties = {
 };
 
 const heading: React.CSSProperties = {
-  fontSize: "48px",
-  color: "#643DFF",
+  fontSize: "24px",
+  color: "#333333",
   marginBottom: "20px",
   textAlign: "center" as const,
 };

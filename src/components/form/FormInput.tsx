@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
@@ -38,7 +38,7 @@ function FormInput({
       </label>
       <div className="relative">
         <Image
-          alt="email icon"
+          alt="icon"
           className="h-4 w-4 absolute top-[50%] bottom-[50%] -translate-y-[50%] left-4"
           src={src as string}
           width={32}
@@ -57,7 +57,7 @@ function FormInput({
           id={id}
           name={name}
           placeholder={placeholder}
-          className={cn(`${error ? 'error-ring' : ''}`, className)}
+          className={cn(`${error ? "error-ring" : ""}`, className)}
           {...props}
         />
       </div>
