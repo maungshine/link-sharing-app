@@ -53,7 +53,11 @@ function Navbar() {
             <span className="hidden sm:block">Profile</span>
           </Link>
           <form action={handleSignOut} className="flex items-center">
-            <SubmitButton pendingLabel="Logging out..." label="Logout"  />
+            <SubmitButton
+              className="h-10 sm:w-24"
+              pendingLabel="Logging out..."
+              label="Logout"
+            />
           </form>
         </div>
         <div className="flex items-center justify-center">
