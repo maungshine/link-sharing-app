@@ -27,7 +27,7 @@ const ToastMessage = ({
       animate={controls} // Added scale property
       exit={{ opacity: 0.2, x: "-50%" }}
       transition={{ type: "spring", bounce: 0.2, duration: 1 }}
-      className="absolute w-[400px] py-4 px-4 rounded-xl bg-darkgrey text-lightgrey left-[50%] right-[50%]  bottom-10 z-[9999] flex items-center justify-center gap-2"
+      className="absolute sm:w-[400px] w-[80%] text-sm sm:text-base py-4 px-4 rounded-xl bg-darkgrey text-lightgrey left-[50%] right-[50%] bottom-5 sm:bottom-10 z-[9999] flex items-center justify-center gap-2"
     >
       {icon}
       <p>{message}</p>
