@@ -117,13 +117,12 @@ function LinkMain({ links }: { links: link[] }) {
       if (trash) {
         const trashItems = trash.map((item) => item.linkId);
         const res = await deleteLinks(trashItems);
-
       }
     }
 
     handleDelete().then(() => {
       setTrash(null);
-      setStagedTrash(null)
+      setStagedTrash(null);
     });
   }, [trash?.length]);
 
@@ -279,11 +278,15 @@ function LinkMain({ links }: { links: link[] }) {
           <form
             className="flex-1 flex flex-col gap-4"
             action={async (formData: FormData) => {
-              setTrash(stagedTrash);
+              const trashItems = stagedTrash && stagedTrash.map((item) => item.linkId);
+              if(trashItems){
+               const res = await deleteLinks(trashItems);
+              }
+
               setStagedTrash(null);
               const state = await saveLinks(formData);
-              if(state) {
-                setState(state)
+              if (state) {
+                setState(state);
               }
             }}
           >
