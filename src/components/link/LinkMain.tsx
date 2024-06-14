@@ -277,11 +277,11 @@ function LinkMain({ links }: { links: link[] }) {
           <form
             className="flex-1 flex flex-col gap-4"
             action={async (formData: FormData) => {
-              setTrash(stagedTrash);
-              setStagedTrash(null);
               const state = await saveLinks(formData);
               if (state) {
                 setState(state);
+                setTrash(stagedTrash);
+                setStagedTrash(null);
               }
             }}
           >
