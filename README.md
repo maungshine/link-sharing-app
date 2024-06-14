@@ -47,9 +47,6 @@ Users should be able to:
 
 ![Landing Page](./screenshots/landing-page.png)
 
-
-
-
 ### Links
 
 - Solution URL: [Add solution URL here](https://github.com/maungshine/link-sharing-app)
@@ -75,12 +72,11 @@ Users should be able to:
 ### What I learned
 
 I learned lots of new things by completing this chanllenge from [Frontend Mentor](https://frontendmentor.io).
-One of it is creating drag and drop features with dnd kit. I have to handle all the states of the links when a user reorder the list using  dnd in two parts. One is in mockup component which need to be synced with the left side of the links which is controlled by the user. I satisfied tackling this challenge.
+One of it is creating drag and drop features with dnd kit. I have to handle all the states of the links when a user reorder the list using dnd in two parts. One is in mockup component which need to be synced with the left side of the links which is controlled by the user. I satisfied tackling this challenge.
 
-Another challenge is that links are dynamic forms and  I needed to validate dynamically and return errors to the specific link that those errors belongs to.
+Another challenge is that links are dynamic forms and I needed to validate dynamically and return errors to the specific link that those errors belongs to.
 
-Next moment that satisfying me is creating my own landing page. It includes some cool animations. 
-
+Next moment that satisfying me is creating my own landing page. It includes some cool animations.
 
 ### Continued development
 
@@ -90,13 +86,11 @@ The areas I need to improve is creating animations with framer motion. I will co
 
 - [Medium](https://www.medium.com) - This website has many useful articles when I stuck in something and finding ways how other people solve that problem.
 
-
 ## Author
 
 - Website - [Maung Shine](https://www.maungshine.site)
 - Frontend Mentor - [@maungshine](https://www.frontendmentor.io/profile/maungshine)
-- Twitter - [@](https://www.twitter.com/yourusername)
-
+- Twitter - [@devmaungshine](https://www.x.com/devmaungshine)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
