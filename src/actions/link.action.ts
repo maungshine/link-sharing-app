@@ -27,40 +27,43 @@ export const saveLinks = async (
       email: session.user?.email as string,
     },
   });
-
-  data.map(async (row) => {
-    const key = parseInt(Object.keys(row)[0]);
-    const existingLink = await db.link.findFirst({
-      where: {
-        userId: user?.id as string,
-        platform: row[key].platform as string,
-      },
-    });
-
-    if (!existingLink) {
-      await db.link.create({
-        data: {
+  try {
+    data.map(async (row) => {
+      const key = parseInt(Object.keys(row)[0]);
+      const existingLink = await db.link.findFirst({
+        where: {
           userId: user?.id as string,
+          platform: row[key].platform as string,
+        },
+      });
+
+      if (!existingLink) {
+        await db.link.create({
+          data: {
+            userId: user?.id as string,
+            platform: row[key].platform as string,
+            url: row[key].link as string,
+            priority: parseInt(row[key].priority as string),
+          },
+        });
+
+        return { errors: [{}] };
+      }
+
+      await db.link.update({
+        where: {
+          id: existingLink?.id as string,
+        },
+        data: {
           platform: row[key].platform as string,
           url: row[key].link as string,
           priority: parseInt(row[key].priority as string),
         },
       });
-
-      return { errors: [{}] };
-    }
-
-    await db.link.update({
-      where: {
-        id: existingLink?.id as string,
-      },
-      data: {
-        platform: row[key].platform as string,
-        url: row[key].link as string,
-        priority: parseInt(row[key].priority as string),
-      },
     });
-  });
+  } catch (error) {
+    console.log("Insert and update error", error);
+  }
 
   revalidatePath("/links");
   return {
