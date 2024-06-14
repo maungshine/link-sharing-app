@@ -28,42 +28,53 @@ export const saveLinks = async (
     },
   });
   try {
-    data.map(async (row) => {
-      const key = parseInt(Object.keys(row)[0]);
-      const existingLink = await db.link.findFirst({
-        where: {
-          userId: user?.id as string,
-          platform: row[key].platform as string,
-        },
-      });
-      console.log(existingLink, row[key].platform, "getting existing link");
-      if (!existingLink) {
-        console.log("writing new link into db", row[key].platform);
-        const data = await db.link.create({
+    await Promise.all(
+      data.map(async (row) => {
+        const key = parseInt(Object.keys(row)[0]);
+        const platform = row[key].platform as string;
+
+        // Make sure user object is valid
+        if (!user || !user.id) {
+          throw new Error("User is not defined or user ID is missing");
+        }
+
+        const userId = user.id as string;
+        const existingLink = await db.link.findFirst({
+          where: {
+            userId,
+            platform,
+          },
+        });
+
+        console.log(existingLink, platform, "getting existing link");
+
+        if (!existingLink) {
+          console.log("writing new link into db", platform);
+          const data = await db.link.create({
+            data: {
+              userId,
+              platform,
+              url: row[key].link as string,
+              priority: parseInt(row[key].priority as string),
+            },
+          });
+
+          console.log(data);
+          return { errors: [{}] };
+        }
+
+        await db.link.update({
+          where: {
+            id: existingLink.id as string,
+          },
           data: {
-            userId: user?.id as string,
-            platform: row[key].platform as string,
+            platform,
             url: row[key].link as string,
             priority: parseInt(row[key].priority as string),
           },
         });
-
-        console.log(data);
-
-        return { errors: [{}] };
-      }
-
-      await db.link.update({
-        where: {
-          id: existingLink?.id as string,
-        },
-        data: {
-          platform: row[key].platform as string,
-          url: row[key].link as string,
-          priority: parseInt(row[key].priority as string),
-        },
-      });
-    });
+      })
+    );
   } catch (error) {
     console.log("Insert and update error", error);
   }
