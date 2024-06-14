@@ -49,7 +49,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/maungshine/link-sharing-app)
+- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/link-sharing-application-using-nextjs-react-tailwind-css-prisma-5ul9tusRtL)
 - Live Site URL: [Add live site URL here](https://link-sharing-app-sigma-mauve.vercel.app/)
 
 ## My process

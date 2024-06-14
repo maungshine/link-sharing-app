@@ -50,14 +50,18 @@ function LoginPage() {
           />
           {formState.errors._form && (
             <div
-              className="border border-red-400 text-red-700 bg-red-200 py-2 px-4"
+              className="border mt-4 border-red-400 text-red-700 bg-red-200 py-2 px-4"
               role="alert"
             >
               {formState.errors._form[0]}
             </div>
           )}
           <div className="flex mt-6">
-            <SubmitButton className="w-full" label="Login" pendingLabel="Logging in..." />
+            <SubmitButton
+              className="w-full"
+              label="Login"
+              pendingLabel="Logging in..."
+            />
           </div>
         </form>
         <div className="mt-8 text-center">
