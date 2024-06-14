@@ -36,9 +36,9 @@ export const saveLinks = async (
           platform: row[key].platform as string,
         },
       });
-      console.log(existingLink, "getting existing link");
+      console.log(existingLink, row[key].platform, "getting existing link");
       if (!existingLink) {
-        console.log("writing new link into db");
+        console.log("writing new link into db", row[key].platform);
         const data = await db.link.create({
           data: {
             userId: user?.id as string,
