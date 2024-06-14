@@ -31,18 +31,21 @@ export const register = async (
     },
   });
 
+  
+  if (existingEmail && !existingEmail.emailVerified) {
+    const token = await generateVerificationCode(email);
+
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/email-verification?token=${token}`;
+
+    await sendVerificationEmail({ to: result.data.email, verificationUrl });
+
+    return {
+      errors: { _form: ["Email already exists! Verify your email"] },
+    };
+  }
+
   if (existingEmail) {
-    if (!existingEmail.emailVerified) {
-      const token = await generateVerificationCode(email);
 
-      const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/email-verification?token=${token}`;
-
-      await sendVerificationEmail({ to: result.data.email, verificationUrl });
-
-      return {
-        errors: { _form: ["Email already exists! Verify your email"] },
-      };
-    }
     return {
       errors: {
         _form: ["Email already exists!"],

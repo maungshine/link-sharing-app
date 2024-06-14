@@ -2,7 +2,6 @@
 
 import { signIn } from "@/auth";
 import { sendVerificationEmail } from "@/lib/sendEmail";
-import { wait } from "@/lib/utils";
 import { generateVerificationCode } from "@/lib/verification";
 import { signInSchema } from "@/lib/zod";
 import { getUserFromDb } from "@/queries/user";
