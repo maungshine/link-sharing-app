@@ -297,6 +297,7 @@ function LinkMain({ links }: { links: link[] }) {
                     {newLinks &&
                       newLinks.map((link, index) => (
                         <AddLink
+                        setCoordinates={setCoordinates}
                           setStagedTrash={setStagedTrash}
                           state={state}
                           trash={trash}

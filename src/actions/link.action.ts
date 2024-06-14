@@ -165,6 +165,7 @@ function getStructuredData(data: { [x: string]: string }) {
 
 export const deleteLinks = async (trashItems: string[]) => {
   try {
+    // Attempt to delete the links with IDs in the trashItems array
     await db.link.deleteMany({
       where: {
         id: {
@@ -172,10 +173,14 @@ export const deleteLinks = async (trashItems: string[]) => {
         },
       },
     });
+    console.log(`Successfully deleted links with IDs: ${trashItems.join(", ")}`);
   } catch (error) {
-    console.log(error);
+    // Log any errors that occur during the deletion process
+    console.error("Error deleting links:", error);
   } finally {
+    // Revalidate the path to ensure the UI reflects the deletion
     revalidatePath("/links");
   }
-  return;
 };
+
+

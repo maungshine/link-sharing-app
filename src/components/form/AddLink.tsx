@@ -22,6 +22,7 @@ import { DataContext } from "../provider/DataProvider";
 import { Link } from "@prisma/client";
 
 function AddLink({
+  setCoordinates,
   trash,
   setStagedTrash,
   state,
@@ -32,6 +33,9 @@ function AddLink({
   platform,
   id,
 }: {
+  setCoordinates: Dispatch<
+    SetStateAction<{ x: string | number; y: string | number }>
+  >;
   state: linkFormState;
   index: number;
   links: link[] | null;
@@ -117,7 +121,9 @@ function AddLink({
                   y = y + 64;
                   return newlink;
                 });
-              
+              setCoordinates((prev) => {
+                return { ...prev, y: (prev.y as number) - 64 };
+              });
               setNewLinks(newLinks);
             }
           }}
