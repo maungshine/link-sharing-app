@@ -80,7 +80,7 @@ Next moment that satisfying me is creating my own landing page. It includes some
 
 ### Continued development
 
-The areas I need to improve is creating animations with framer motion. I will continuously improve my skill on creating aniamation.
+The areas I need to improve is creating animations with framer motion. I will continuously improve my skill on creating animation.
 
 ### Useful resources
 
