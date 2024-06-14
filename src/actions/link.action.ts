@@ -147,13 +147,18 @@ function getStructuredData(data: { [x: string]: string }) {
 }
 
 export const deleteLinks = async (trashItems: string[]) => {
-  trashItems.map(async (id) => {
-    await db.link.delete({
-      where: {
-        id,
-      },
+  try {
+    trashItems.map(async (id) => {
+      await db.link.delete({
+        where: {
+          id,
+        },
+      });
     });
-  });
-
-  revalidatePath("/links");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    revalidatePath("/links");
+  }
+  return;
 };
