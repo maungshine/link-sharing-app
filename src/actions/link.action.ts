@@ -38,7 +38,7 @@ export const saveLinks = async (
       });
 
       if (!existingLink) {
-        await db.link.create({
+        const data = await db.link.create({
           data: {
             userId: user?.id as string,
             platform: row[key].platform as string,
@@ -46,6 +46,8 @@ export const saveLinks = async (
             priority: parseInt(row[key].priority as string),
           },
         });
+
+        console.log(data);
 
         return { errors: [{}] };
       }
