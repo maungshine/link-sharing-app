@@ -123,6 +123,7 @@ function LinkMain({ links }: { links: link[] }) {
 
     handleDelete().then(() => {
       setTrash(null);
+      setStagedTrash(null)
     });
   }, [trash?.length]);
 
