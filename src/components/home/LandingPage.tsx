@@ -6,10 +6,11 @@ import TestimonialSection from "./TestimonialSection";
 import HeroSection from "./Hero";
 import FeatureSection from "./FeatureSection";
 import HowItWorksSection from "./HowItWorks";
-import Image from "next/image";
-import IconLogo from "../svg/IconLogo";
 
-const LandingPage: React.FC = () => {
+import IconLogo from "../svg/IconLogo";
+import { User } from "@prisma/client";
+
+function LandingPage({ user }: { user: User | null }) {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navbar */}
@@ -18,20 +19,31 @@ const LandingPage: React.FC = () => {
           <Link href="/" className="text-2xl font-bold sm:w-40 w-36">
             <IconLogo className={""} />
           </Link>
-          <div className="flex items-center">
-            <Link
-              href="/login"
-              className="mx-2 text-lg hover:text-yellow-300 transition duration-300"
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="mx-2 sm:text-lg text-nowrap  bg-yellow-400 text-indigo-600 font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:bg-yellow-500 hover:scale-105"
-            >
-              Sign Up
-            </Link>
-          </div>
+          {!user ? (
+            <div className="flex items-center">
+              <Link
+                href="/login"
+                className="mx-2 text-lg hover:text-yellow-300 transition duration-300"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="mx-2 sm:text-lg text-nowrap  bg-yellow-400 text-indigo-600 font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:bg-yellow-500 hover:scale-105"
+              >
+                Sign Up
+              </Link>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <Link
+                href="/links"
+                className="mx-2 sm:text-lg text-nowrap  bg-yellow-400 text-indigo-600 font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:bg-yellow-500 hover:scale-105"
+              >
+                Dashboard
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -128,6 +140,6 @@ const LandingPage: React.FC = () => {
       </footer>
     </div>
   );
-};
+}
 
 export default LandingPage;

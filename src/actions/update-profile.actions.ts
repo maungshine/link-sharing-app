@@ -1,10 +1,6 @@
 "use server";
 import { z } from "zod";
-
-import fs from "fs";
-import path from "path";
 import { revalidatePath } from "next/cache";
-import crypto from "crypto";
 import { db } from "@/db";
 import { User } from "@prisma/client";
 import { auth } from "@/auth";
@@ -105,7 +101,7 @@ export const updateProfile = async (
       return { errors: { email: ["Email already exists!"] } };
     }
   }
-  
+
   const updatedUserProfile = await db.user.update({
     where: { id: userProfile.id },
     data: {
