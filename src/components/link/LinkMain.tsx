@@ -278,6 +278,7 @@ function LinkMain({ links }: { links: link[] }) {
             className="flex-1 flex flex-col gap-4"
             action={async (formData: FormData) => {
               const state = await saveLinks(formData);
+              console.log(state);
               if (state) {
                 setState(state);
                 setTrash(stagedTrash);
