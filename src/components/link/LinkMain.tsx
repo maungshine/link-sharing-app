@@ -50,8 +50,8 @@ function LinkMain({ links }: { links: link[] }) {
     y: string | number;
   }>({ x: Base_X, y: Base_Y });
   const [newLinks, setNewLinks] = useState<link[] | null>(links);
-  const router = useRouter();
-  const [state, action] = useFormState(saveLinks, { errors: [{}] });
+
+  const [state, setState] = useState({ errors: [{}] });
 
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
@@ -116,7 +116,8 @@ function LinkMain({ links }: { links: link[] }) {
     async function handleDelete() {
       if (trash) {
         const trashItems = trash.map((item) => item.linkId);
-        await deleteLinks(trashItems);
+        const res = await deleteLinks(trashItems);
+
       }
     }
 
@@ -276,10 +277,13 @@ function LinkMain({ links }: { links: link[] }) {
           )}
           <form
             className="flex-1 flex flex-col gap-4"
-            action={(formData: FormData) => {
+            action={async (formData: FormData) => {
               setTrash(stagedTrash);
               setStagedTrash(null);
-              action(formData);
+              const state = await saveLinks(formData);
+              if(state) {
+                setState(state)
+              }
             }}
           >
             {newLinks && newLinks?.length > 0 && (

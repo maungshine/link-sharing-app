@@ -8,7 +8,6 @@ import { structureType, structureTypeArray } from "@/types/response";
 import { revalidatePath } from "next/cache";
 
 export const saveLinks = async (
-  formState: { errors: structureTypeArray | {}[] },
   formData: FormData
 ): Promise<{ errors: structureTypeArray | {}[] }> => {
   const { result, errors } = saveLinksSchema(formData);

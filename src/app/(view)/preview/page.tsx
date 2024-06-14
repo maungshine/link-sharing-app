@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import BackToEditor from "@/components/preview/BackToEditor";
 import CopyLinkToClipboard from "@/components/share-view/CopyLinkToClickboard";
 import IconArrowRight from "@/components/svg/IconArrowRight";
-import { Button } from "@/components/ui/button";
 import { getLinks } from "@/queries/link";
 import { getUserFromDb } from "@/queries/user";
 import Image from "next/image";
