@@ -1,3 +1,103 @@
+# Frontend Mentor - Link-sharing app solution
+
+This is a solution to the [Link-sharing app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/linksharing-app-Fbt7yweGsT). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+
+## Table of contents
+
+- [Frontend Mentor - Link-sharing app solution](#frontend-mentor---link-sharing-app-solution)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+    - [Links](#links)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+    - [Continued development](#continued-development)
+    - [Useful resources](#useful-resources)
+  - [Author](#author)
+  - [Getting Started](#getting-started)
+  - [Learn More](#learn-more)
+  - [Deploy on Vercel](#deploy-on-vercel)
+
+**Note: Delete this note and update the table of contents based on what sections you keep.**
+
+## Overview
+
+### The challenge
+
+Users should be able to:
+
+- Create, read, update, delete links and see previews in the mobile mockup
+- Receive validations if the links form is submitted without a URL or with the wrong URL pattern for the platform
+- Drag and drop links to reorder them
+- Add profile details like profile picture, first name, last name, and email
+- Receive validations if the profile details form is saved with no first or last name
+- Preview their devlinks profile and copy the link to their clipboard
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
+- **Bonus**: Save details to a database (build the project as a full-stack app)
+- **Bonus**: Create an account and log in (add user authentication to the full-stack app)
+
+### Screenshot
+
+![Dashboard](./screenshots/dashboard.png)
+
+**I created my own landing page**
+
+![Landing Page](./screenshots/landing-page.png)
+
+
+
+
+### Links
+
+- Solution URL: [Add solution URL here](https://github.com/maungshine/link-sharing-app)
+- Live Site URL: [Add live site URL here](https://link-sharing-app-sigma-mauve.vercel.app/)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- Tailwind CSS
+- Shadcn ui
+- Responsive layout with Flexbox and CSS Grid
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
+- [Next.js](https://nextjs.org/) - React framework
+- [zod](https://zod.dev) - For form validation
+- [Framer Motion](https://framer.com/) - For animation
+- [Prisma](https://prisma.io) - For ORM
+- [Neon Postgres](https://neon.tech) - For Database
+- [AWS S3](https://aws.amazon.com) - For Image Storage
+
+### What I learned
+
+I learned lots of new things by completing this chanllenge from [Frontend Mentor](https://frontendmentor.io).
+One of it is creating drag and drop features with dnd kit. I have to handle all the states of the links when a user reorder the list using  dnd in two parts. One is in mockup component which need to be synced with the left side of the links which is controlled by the user. I satisfied tackling this challenge.
+
+Another challenge is that links are dynamic forms and  I needed to validate dynamically and return errors to the specific link that those errors belongs to.
+
+Next moment that satisfying me is creating my own landing page. It includes some cool animations. 
+
+
+### Continued development
+
+The areas I need to improve is creating animations with framer motion. I will continuously improve my skill on creating aniamation.
+
+### Useful resources
+
+- [Medium](https://www.medium.com) - This website has many useful articles when I stuck in something and finding ways how other people solve that problem.
+
+
+## Author
+
+- Website - [Maung Shine](https://www.maungshine.site)
+- Frontend Mentor - [@maungshine](https://www.frontendmentor.io/profile/maungshine)
+- Twitter - [@](https://www.twitter.com/yourusername)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
